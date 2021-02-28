@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GithubIssueTracker</string>
+    <string name="opened">Opened</string>
+    <string name="open">Open</string>
+    <string name="_29_oct_2019">29 Oct 2019</string>
+    <string name="fastlane_droid">fastlane-droid</string>
+    <string name="sample_total_comments">5</string>
+    <string name="comments">comments</string>
+    <string name="repository">Repository</string>
 </resources>
