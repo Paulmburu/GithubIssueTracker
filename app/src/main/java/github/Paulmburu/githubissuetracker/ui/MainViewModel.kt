@@ -18,6 +18,10 @@ class MainViewModel(
     val userIssuesLiveData: LiveData<List<UserIssues>>
         get() = _userIssuesLiveData
 
+    private val _errorsLiveData = MutableLiveData<String>()
+    val errorsLiveData: LiveData<String>
+        get() = _errorsLiveData
+
 
     fun fetchUserIssues(login: String) {
         viewModelScope.launch(coroutineDispatcher) {
@@ -31,11 +35,11 @@ class MainViewModel(
         }
     }
 
-    private suspend fun handleFetchFailure(
+    private fun handleFetchFailure(
         failure: ApiFailure,
         login: String?
     ) {
-
+        _errorsLiveData.postValue(failure.failureType.name)
     }
 }
 

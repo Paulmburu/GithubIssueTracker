@@ -46,6 +46,7 @@ dependencies {
     implementation apolloDependencies
     implementation base
     implementation lifecycle
+    implementation lottieAnimations
 
     testImplementation testLibraries
     androidTestImplementation androidTestLibraries
