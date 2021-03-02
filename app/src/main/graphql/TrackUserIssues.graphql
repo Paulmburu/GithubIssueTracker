@@ -1,0 +1,21 @@
+query TrackUserIssues($login: String!){
+    user(login: $login) {
+        issues(orderBy: {field: CREATED_AT, direction: ASC}, last: 20) {
+            edges {
+                node {
+                    id
+                    repository {
+                        id
+                        name
+                    }
+                    state
+                    comments {
+                        totalCount
+                    }
+                    createdAt
+                    bodyText
+                }
+            }
+        }
+    }
+}
