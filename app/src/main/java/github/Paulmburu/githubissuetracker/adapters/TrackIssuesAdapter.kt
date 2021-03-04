@@ -2,19 +2,20 @@ package github.Paulmburu.githubissuetracker.adapters
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import github.Paulmburu.githubissuetracker.R
-import github.Paulmburu.githubissuetracker.data.models.UserIssues
+import github.Paulmburu.githubissuetracker.data.models.UserIssue
 import github.Paulmburu.githubissuetracker.databinding.RowGithubIssueBinding
 import github.Paulmburu.githubissuetracker.utils.convertDate
 import github.Paulmburu.githubissuetracker.utils.convertDateUsingLegacyClasses
 
 class TrackIssuesAdapter(
     private val context: Context,
-    val issues: List<UserIssues>
+    val issues: List<UserIssue>
 ) :
     RecyclerView.Adapter<TrackIssuesAdapter.ViewHolder>() {
 
@@ -43,18 +44,11 @@ class TrackIssuesAdapter(
         issues.state.run {
             holder.binding.issueStateChip.text = this
             if (this.equals("OPEN"))
-                holder.binding.issueStateChip.chipBackgroundColor =
-                    ContextCompat.getColorStateList(
-                        context,
-                        R.color.scarlet
-                    )
-            else (this.equals("CLOSED"))
-            holder.binding.issueStateChip.chipBackgroundColor =
-                ContextCompat.getColorStateList(
-                    context,
-                    R.color.purple_500
-                )
+                holder.binding.issueStateChip.setChipBackgroundColorResource(R.color.scarlet)
+            else if(this.equals("CLOSED"))
+                holder.binding.issueStateChip.setChipBackgroundColorResource(R.color.purple_500)
         }
+
 
         holder.binding.issueBodyTextView.text = issues.bodyText
         holder.binding.repositoryTextView.text = issues.repositoryName

@@ -2,7 +2,7 @@ package github.Paulmburu.githubissuetracker.data.models
 
 import TrackUserIssuesQuery
 
-data class UserIssues(
+data class UserIssue(
     val repositoryId: String?,
     val repositoryName: String?,
     val state: String?,
