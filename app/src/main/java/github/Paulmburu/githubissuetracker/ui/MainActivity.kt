@@ -1,35 +1,25 @@
 package github.Paulmburu.githubissuetracker.ui
 
-import TrackUserIssuesQuery
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
-import com.apollographql.apollo.coroutines.toDeferred
-import com.apollographql.apollo.exception.ApolloException
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import github.Paulmburu.githubissuetracker.R
 import github.Paulmburu.githubissuetracker.adapters.TrackIssuesAdapter
-import github.Paulmburu.githubissuetracker.apolloClient
-import github.Paulmburu.githubissuetracker.data.UserIssuesRepository
-import github.Paulmburu.githubissuetracker.data.models.UserIssues
 import github.Paulmburu.githubissuetracker.utils.hideKeyboard
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter: TrackIssuesAdapter
-    private lateinit var viewModel: MainViewModel
-    private lateinit var viewModelFactory: MainViewFactory
+    private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var adapter: TrackIssuesAdapter
     private lateinit var searchView: SearchView
     private lateinit var searchItem: MenuItem
 
@@ -39,8 +29,6 @@ class MainActivity : AppCompatActivity() {
         main_toolbar.title = getString(R.string.menu_search)
         main_toolbar.inflateMenu(R.menu.menu_search)
 
-        viewModelFactory = MainViewFactory(UserIssuesRepository(apolloClient))
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         observeViewModel()
 
         searchItem = main_toolbar.menu.findItem(R.id.search_item)

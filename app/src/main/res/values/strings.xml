@@ -9,4 +9,6 @@
     <string name="repository">Repository</string>
     <string name="sample_body_text">\@TheDancerCodes Is it possible to also add a sample CI, for Github Actions.\nAlso, show how we can run different lanes in different branches</string>
     <string name="menu_search">Search</string>
+    <string name="search_user_issues">Search User Issues</string>
+    <string name="empty_result">Empty Result</string>
 </resources>

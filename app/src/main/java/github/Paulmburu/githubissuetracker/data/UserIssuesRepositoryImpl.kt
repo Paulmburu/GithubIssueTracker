@@ -1,20 +1,27 @@
 package github.Paulmburu.githubissuetracker.data
 
 import TrackUserIssuesQuery
-import android.util.Log
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.toDeferred
-import github.Paulmburu.githubissuetracker.data.models.UserIssues
+import github.Paulmburu.githubissuetracker.data.models.UserIssue
 import github.Paulmburu.githubissuetracker.network.ApiFailure
 import github.Paulmburu.githubissuetracker.network.data
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class UserIssuesRepository(private val apolloClient: ApolloClient) {
+interface UserIssuesRepository {
     suspend fun fetchUserIssues(
         login: String,
         onFailure: (ApiFailure) -> Unit
-    ): kotlinx.coroutines.flow.Flow<ArrayList<UserIssues>?> {
-        val issuesData = arrayListOf<UserIssues>()
+    ): Flow<List<UserIssue>?>
+}
+
+class UserIssuesRepositoryImpl(private val apolloClient: ApolloClient) : UserIssuesRepository {
+    override suspend fun fetchUserIssues(
+        login: String,
+        onFailure: (ApiFailure) -> Unit
+    ): Flow<List<UserIssue>?> {
+        val issuesData = arrayListOf<UserIssue>()
         val response = apolloClient.query(TrackUserIssuesQuery(login)).toDeferred().data(onFailure)
             ?: return flowOf()
         return flowOf(
@@ -22,7 +29,7 @@ class UserIssuesRepository(private val apolloClient: ApolloClient) {
                 when {
                     it.user() != null -> {
                         it.user()?.issues()?.edges()?.forEach {
-                            issuesData.add(UserIssues(it.node()))
+                            issuesData.add(UserIssue(it.node()))
                         }
                         issuesData
                     }
