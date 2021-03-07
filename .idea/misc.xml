@@ -5,8 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_bug_report_24.xml" value="0.2328125" />
         <entry key="app/src/main/res/drawable/ic_comment.xml" value="0.2328125" />
+        <entry key="app/src/main/res/drawable/ic_filter_24.xml" value="0.2328125" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2328125" />
         <entry key="app/src/main/res/drawable/ic_repo.xml" value="0.2328125" />
+        <entry key="app/src/main/res/drawable/ic_search_24.xml" value="0.2328125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_github_issue.xml" value="0.14" />
         <entry key="app/src/main/res/menu/menu_search.xml" value="0.22760416666666666" />
