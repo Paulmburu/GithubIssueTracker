@@ -1,6 +1,6 @@
-query TrackUserIssues($login: String!){
+query TrackUserIssues($login: String!, $direction: OrderDirection!, $labels: [String!]) {
     user(login: $login) {
-        issues(orderBy: {field: CREATED_AT, direction: DESC}, last: 20) {
+        issues(orderBy: {field: CREATED_AT, direction: $direction}, last: 20, filterBy: {labels: $labels}) {
             edges {
                 node {
                     id

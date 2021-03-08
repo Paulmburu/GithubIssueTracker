@@ -14,4 +14,6 @@
     <color name="primaryLightColor">#ffffff</color>
     <color name="primaryDarkColor">#bcbcbc</color>
     <color name="primaryTextColor">#000000</color>
+    
+    <color name="sea_buckthorn">#F9A826</color>
 </resources>
