@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchItem: MenuItem
     private lateinit var filterItem: MenuItem
     private lateinit var orderDirectionType: OrderDirection
+    private var label: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,10 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     fun observeCheckedChips() {
         main_chip_group.setOnCheckedChangeListener { group, checkedId ->
-            Log.d(
-                "TraChipGroup",
-                "observeCheckedChips: ${group.findViewById<Chip>(checkedId).text}"
-            )
+            viewModel.setCheckChipId(checkedId)
         }
     }
 
@@ -75,19 +73,23 @@ class MainActivity : AppCompatActivity() {
         viewModel.userIssuesLiveData.observe(this, Observer {
             adapter = TrackIssuesAdapter(this, it)
             issues_recyclerview.adapter = adapter
-            animateViews(1.0f,
+            animateViews(
+                1.0f,
                 0.0f,
                 0.0f,
-                false)
+                false
+            )
 
 
         })
 
         viewModel.errorsLiveData.observe(this, Observer {
-            animateViews(0.0f,
+            animateViews(
                 0.0f,
                 0.0f,
-                true)
+                0.0f,
+                true
+            )
 
             Snackbar.make(
                 main_frame_layout,
@@ -97,11 +99,32 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.directionFilter.observe(this, Observer {
-            if(it != null) {
+            if (it != null) {
                 orderDirectionType = it
                 var login = main_toolbar.title
-                if(!login.equals(getString(R.string.menu_search))) {
-                    fetchData(login.toString(), Input.fromNullable(null))
+                if (!login.equals(getString(R.string.menu_search))) {
+                    if (label == null) fetchData(login.toString(), Input.fromNullable(null))
+                    else fetchData(login.toString(), Input.fromNullable(listOf(label)))
+                }
+            }
+        })
+
+        viewModel.checkedChipId.observe(this, Observer {
+
+            if (it != null) {
+                var login = main_toolbar.title
+                if (!login.equals(getString(R.string.menu_search))) {
+                    if (it == -1) {
+                        label = null
+                        fetchData(login.toString(), Input.fromNullable(null))
+                    } else {
+                        label = main_chip_group.findViewById<Chip>(it).text.toString()
+                        fetchData(login.toString(), Input.fromNullable(listOf(label)))
+                        Log.d(
+                            "TraChipGroup",
+                            "observeCheckedChips: ${label}"
+                        )
+                    }
                 }
             }
         })
@@ -119,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         empty_result_image_view.isVisible = emptyResultImageViewValue
     }
 
-    fun fetchData(login: String, labels: Input<List<String?>?>){
+    fun fetchData(login: String, labels: Input<List<String?>?>) {
         viewModel.fetchUserIssues(
             login,
             orderDirectionType,

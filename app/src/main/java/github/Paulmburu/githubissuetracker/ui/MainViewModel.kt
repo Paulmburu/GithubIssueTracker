@@ -31,6 +31,10 @@ class MainViewModel @ViewModelInject constructor(
     val directionFilter: LiveData<OrderDirection>
         get() = _directionFilter
 
+    private val _checkedChipId = MutableLiveData<Int>(null)
+    val checkedChipId: LiveData<Int>
+        get() = _checkedChipId
+
 
     fun fetchUserIssues(
         login: String,
@@ -60,5 +64,9 @@ class MainViewModel @ViewModelInject constructor(
         else if (_directionFilter.value == null)
             _directionFilter.value = OrderDirection.DESC
         else _directionFilter.value = OrderDirection.ASC
+    }
+
+    fun setCheckChipId(id: Int){
+        _checkedChipId.value = id
     }
 }
