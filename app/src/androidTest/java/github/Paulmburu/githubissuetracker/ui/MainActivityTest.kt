@@ -43,7 +43,6 @@ class MainActivityTest{
 
         onView(withId(R.id.search_item)).perform(click())
         onView(isAssignableFrom(AutoCompleteTextView::class.java)).perform(typeText(LOGIN))
-
     }
 
     @Test
