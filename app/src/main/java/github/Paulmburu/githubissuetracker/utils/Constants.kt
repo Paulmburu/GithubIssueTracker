@@ -1,6 +1,5 @@
 package github.Paulmburu.githubissuetracker.utils
 
-import java.time.format.DateTimeFormatter
 
 object Constants {
     const val GRAPHQL_BASE_URL = "https://api.github.com/graphql"

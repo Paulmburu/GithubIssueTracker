@@ -1,13 +1,16 @@
 package github.Paulmburu.githubissuetracker.ui
 
+import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.apollographql.apollo.api.Input
+import dagger.hilt.android.qualifiers.ApplicationContext
+import github.Paulmburu.githubissuetracker.R
 import github.Paulmburu.githubissuetracker.data.UserIssuesRepository
-import github.Paulmburu.githubissuetracker.data.UserIssuesRepositoryImpl
 import github.Paulmburu.githubissuetracker.data.models.UserIssue
 import github.Paulmburu.githubissuetracker.di.NetworkModule
 import github.Paulmburu.githubissuetracker.network.ApiFailure
+import github.Paulmburu.githubissuetracker.network.ApiFailureType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -55,14 +58,27 @@ class MainViewModel @ViewModelInject constructor(
     private fun handleFetchFailure(
         failure: ApiFailure
     ) {
-        _errorsLiveData.postValue(failure.failureType.name)
+        when(failure.failureType){
+            ApiFailureType.NO_NETWORK -> displayError("No network connection")
+            ApiFailureType.RESPONSE_ERROR -> displayError("Error ! Please confirm the github username is correct")
+            ApiFailureType.HTTP_ERROR -> displayError("HTTP error")
+            ApiFailureType.SERVER_ERROR -> displayError("Server error")
+            ApiFailureType.PARSE_ERROR -> displayError("Request failed to parse")
+            ApiFailureType.CANCELED -> displayError("Request Canceled")
+            ApiFailureType.UNAUTHORIZED -> displayError("UNAUTHORIZED")
+            ApiFailureType.UNKNOWN-> displayError("Unexpected Error occured, Please Try Again")
+        }
+
     }
+
+    private fun displayError(error: String) = _errorsLiveData.postValue(error)
 
     fun toggleDirectionFilter() {
         if (_directionFilter.value == OrderDirection.ASC)
             _directionFilter.value = OrderDirection.DESC
         else if (_directionFilter.value == null)
             _directionFilter.value = OrderDirection.DESC
+
         else _directionFilter.value = OrderDirection.ASC
     }
 

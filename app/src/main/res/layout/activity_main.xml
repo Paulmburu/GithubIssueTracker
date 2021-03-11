@@ -35,7 +35,7 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/main_chip_group"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:singleSelection="true"
                 app:singleLine="true">
@@ -45,63 +45,63 @@
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="bug" />
+                    android:text="@string/bug" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/documentation_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="documentation" />
+                    android:text="@string/documentation" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/duplicate_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="duplicate" />
+                    android:text="@string/duplicate" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/enhancement_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="enhancement" />
+                    android:text="@string/enhancement" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/good_first_issue_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="good first issue" />
+                    android:text="@string/good_first_issue" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/help_wanted_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="help wanted" />
+                    android:text="@string/help_wanted" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/invalid_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="invalid" />
+                    android:text="@string/invalid" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/question_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="question" />
+                    android:text="@string/question" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/wont_fix_chip"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="wontfix" />
+                    android:text="@string/wontfix" />
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
@@ -168,6 +168,20 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/empty_result" />
+
+        <TextView
+            android:id="@+id/no_data_available_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/no_data_available"
+            android:textColor="@color/primaryTextColor"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/empty_result_image_view"
+            app:layout_constraintEnd_toEndOf="@+id/empty_result_image_view"
+            app:layout_constraintStart_toStartOf="@+id/empty_result_image_view"
+            app:layout_constraintTop_toTopOf="@+id/empty_result_image_view"
+            app:layout_constraintVertical_bias="0.77" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

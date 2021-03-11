@@ -1,6 +1,7 @@
 package github.Paulmburu.githubissuetracker.data
 
 
+import com.apollographql.apollo.api.Input
 import github.Paulmburu.githubissuetracker.data.AndroidSampleData.issue1
 import github.Paulmburu.githubissuetracker.data.AndroidSampleData.issue2
 import github.Paulmburu.githubissuetracker.data.AndroidSampleData.issue3
@@ -12,6 +13,7 @@ import github.Paulmburu.githubissuetracker.network.ApiFailureType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import type.OrderDirection
 
 class FakeAndroidUsserIssuesRespository : UserIssuesRepository{
 
@@ -23,6 +25,8 @@ class FakeAndroidUsserIssuesRespository : UserIssuesRepository{
 
     override suspend fun fetchUserIssues(
         login: String,
+        direction: OrderDirection,
+        labels: Input<List<String?>?>,
         onFailure: (ApiFailure) -> Unit
     ): Flow<List<UserIssue>?> {
         if(issuesData.size == 0){

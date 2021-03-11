@@ -32,3 +32,5 @@ fun String.convertDateUsingLegacyClasses() : String {
         e.printStackTrace().toString()
     }
 }
+
+fun String.validateIfEmpty(): String = if(this.isEmpty()) "..." else this

@@ -11,4 +11,17 @@
     <string name="menu_search">Search</string>
     <string name="search_user_issues">Search User Issues</string>
     <string name="empty_result">Empty Result</string>
+    <string name="bug">bug</string>
+    <string name="documentation">documentation</string>
+    <string name="duplicate">duplicate</string>
+    <string name="enhancement">enhancement</string>
+    <string name="good_first_issue">good first issue</string>
+    <string name="help_wanted">help wanted</string>
+    <string name="invalid">invalid</string>
+    <string name="question">question</string>
+    <string name="wontfix">wontfix</string>
+    <string name="no_data_available">No data available</string>
+    <string name="no_network_connection">No network connection</string>
+    <string name="response_error_string">Error ! Please confirm the github username is correct</string>
+
 </resources>

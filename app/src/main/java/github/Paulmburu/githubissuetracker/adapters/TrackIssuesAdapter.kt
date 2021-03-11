@@ -2,16 +2,15 @@ package github.Paulmburu.githubissuetracker.adapters
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import github.Paulmburu.githubissuetracker.R
 import github.Paulmburu.githubissuetracker.data.models.UserIssue
 import github.Paulmburu.githubissuetracker.databinding.RowGithubIssueBinding
 import github.Paulmburu.githubissuetracker.utils.convertDate
 import github.Paulmburu.githubissuetracker.utils.convertDateUsingLegacyClasses
+import github.Paulmburu.githubissuetracker.utils.validateIfEmpty
 
 class TrackIssuesAdapter(
     private val context: Context,
@@ -50,7 +49,7 @@ class TrackIssuesAdapter(
         }
 
 
-        holder.binding.issueBodyTextView.text = issues.bodyText
+        holder.binding.issueBodyTextView.text = issues.bodyText.validateIfEmpty()
         holder.binding.repositoryTextView.text = issues.repositoryName
         holder.binding.totalCommentsTextView.text = issues.commentsCount
     }

@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         main_toolbar.title = getString(R.string.menu_search)
         main_toolbar.inflateMenu(R.menu.menu_search)
-        orderDirectionType = OrderDirection.ASC
         observeCheckedChips()
         observeViewModel()
 
@@ -71,16 +70,17 @@ class MainActivity : AppCompatActivity() {
 
     fun observeViewModel() {
         viewModel.userIssuesLiveData.observe(this, Observer {
-            adapter = TrackIssuesAdapter(this, it)
-            issues_recyclerview.adapter = adapter
-            animateViews(
-                1.0f,
-                0.0f,
-                0.0f,
-                false
-            )
-
-
+            if (it.isEmpty()) noDataAvailable()
+            else {
+                adapter = TrackIssuesAdapter(this, it)
+                issues_recyclerview.adapter = adapter
+                animateViews(
+                    1.0f,
+                    0.0f,
+                    0.0f,
+                    false
+                )
+            }
         })
 
         viewModel.errorsLiveData.observe(this, Observer {
@@ -140,6 +140,7 @@ class MainActivity : AppCompatActivity() {
         progress_animation.animate().alpha(progressAnimationValue)
         search_user_issues_image_view.animate().alpha(searchUserIssuesImageViewValue)
         empty_result_image_view.isVisible = emptyResultImageViewValue
+        no_data_available_textView.isVisible = emptyResultImageViewValue
     }
 
     fun fetchData(login: String, labels: Input<List<String?>?>) {
@@ -155,4 +156,11 @@ class MainActivity : AppCompatActivity() {
             false
         )
     }
+
+    fun noDataAvailable() = animateViews(
+        0.0f,
+        0.0f,
+        0.0f,
+        true
+    )
 }
