@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         main_toolbar.title = getString(R.string.menu_search)
         main_toolbar.inflateMenu(R.menu.menu_search)
+        orderDirectionType = OrderDirection.ASC
         observeCheckedChips()
         observeViewModel()
 
